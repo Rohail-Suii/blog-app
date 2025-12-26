@@ -4,18 +4,19 @@
  */
 
 import { createClient } from '@/lib/supabase/client';
+import { getBaseURL } from '@/lib/utils';
 
 /**
  * Sign in with email and password
  */
 export async function signInWithEmail(email: string, password: string) {
   const supabase = createClient();
-  
+
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
-  
+
   return { data, error };
 }
 
@@ -24,15 +25,15 @@ export async function signInWithEmail(email: string, password: string) {
  */
 export async function signUpWithEmail(email: string, password: string) {
   const supabase = createClient();
-  
+
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      emailRedirectTo: `${window.location.origin}/auth/callback`,
+      emailRedirectTo: `${getBaseURL()}/auth/callback?redirectTo=/auth/login`,
     },
   });
-  
+
   return { data, error };
 }
 
@@ -41,14 +42,14 @@ export async function signUpWithEmail(email: string, password: string) {
  */
 export async function signInWithGoogle() {
   const supabase = createClient();
-  
+
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: `${window.location.origin}/auth/callback`,
+      redirectTo: `${getBaseURL()}/auth/callback`,
     },
   });
-  
+
   return { data, error };
 }
 
@@ -57,14 +58,14 @@ export async function signInWithGoogle() {
  */
 export async function signInWithOTP(email: string) {
   const supabase = createClient();
-  
+
   const { data, error } = await supabase.auth.signInWithOtp({
     email,
     options: {
-      emailRedirectTo: `${window.location.origin}/auth/callback`,
+      emailRedirectTo: `${getBaseURL()}/auth/callback?redirectTo=/auth/login`,
     },
   });
-  
+
   return { data, error };
 }
 
@@ -73,13 +74,13 @@ export async function signInWithOTP(email: string) {
  */
 export async function verifyOTP(email: string, token: string) {
   const supabase = createClient();
-  
+
   const { data, error } = await supabase.auth.verifyOtp({
     email,
     token,
     type: 'email',
   });
-  
+
   return { data, error };
 }
 
@@ -88,9 +89,9 @@ export async function verifyOTP(email: string, token: string) {
  */
 export async function signOut() {
   const supabase = createClient();
-  
+
   const { error } = await supabase.auth.signOut();
-  
+
   return { error };
 }
 
@@ -99,9 +100,9 @@ export async function signOut() {
  */
 export async function getCurrentUser() {
   const supabase = createClient();
-  
+
   const { data: { user }, error } = await supabase.auth.getUser();
-  
+
   return { user, error };
 }
 
@@ -110,8 +111,8 @@ export async function getCurrentUser() {
  */
 export async function getSession() {
   const supabase = createClient();
-  
+
   const { data: { session }, error } = await supabase.auth.getSession();
-  
+
   return { session, error };
 }

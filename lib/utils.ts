@@ -101,11 +101,30 @@ export function debounce<T extends (...args: any[]) => any>(
   wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | null = null;
-  
+
   return function executedFunction(...args: Parameters<T>) {
     if (timeout) {
       clearTimeout(timeout);
     }
     timeout = setTimeout(() => func(...args), wait);
   };
+}
+
+/**
+ * Gets the base URL for the application
+ * Handles different environments (development, production)
+ */
+export function getBaseURL(): string {
+  // If we are in the browser, use window.location.origin
+  if (typeof window !== 'undefined') {
+    return window.location.origin;
+  }
+
+  // If we are on the server (e.g., in a server action or SSR)
+  // Use environment variables
+  const url =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : 'http://localhost:3000');
+
+  return url;
 }
