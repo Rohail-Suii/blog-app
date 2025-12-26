@@ -169,41 +169,55 @@ export default async function PostPage({ params }: PostPageProps) {
 
       {/* Post Header */}
       <header className="mb-8">
-        <div className="flex items-start justify-between gap-4">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-            {post.title}
-          </h1>
+        <h1 className="text-3xl font-bold font-serif tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl leading-tight mb-6">
+          {post.title}
+        </h1>
 
-          {/* Edit/Delete Actions for author */}
-          <PostActionsWrapper
-            postId={post.id}
-            postTitle={post.title}
-            authorId={post.author_id}
-            currentUserId={user?.id}
-          />
+        <div className="flex items-center justify-between border-b border-gray-100 pb-8 mb-8">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-medium font-serif">
+              {post.author?.name ? post.author.name[0] : 'A'}
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium text-gray-900 dark:text-gray-200">
+                  {post.author?.name || 'Unknown Author'}
+                </span>
+                <button className="text-sm text-green-600 hover:text-green-700">Follow</button>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-500">
+                <span className="text-sm text-gray-500">4 min read</span>
+                <span>·</span>
+                <time dateTime={post.created_at}>
+                  {formatDate(post.created_at)}
+                </time>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 text-gray-400">
+            <button className="hover:text-gray-600 transition-colors">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M12 8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </button>
+            <button className="hover:text-gray-600 transition-colors">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /><polyline points="16 6 12 2 8 6" /><line x1="12" y1="2" x2="12" y2="15" /></svg>
+            </button>
+            {/* Edit/Delete Actions for author */}
+            <PostActionsWrapper
+              postId={post.id}
+              postTitle={post.title}
+              authorId={post.author_id}
+              currentUserId={user?.id}
+            />
+          </div>
         </div>
 
         {/* Draft Badge */}
         {post.status === 'draft' && (
           <span className="mt-2 inline-block rounded-full bg-yellow-100 px-3 py-1 text-xs font-medium text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
-            Draft - Only visible to you
+            Draft
           </span>
         )}
-
-        <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-          <time dateTime={post.created_at}>
-            Published on {formatDate(post.created_at)}
-          </time>
-
-          {post.updated_at !== post.created_at && (
-            <span className="flex items-center gap-1">
-              <span>•</span>
-              <time dateTime={post.updated_at}>
-                Updated {formatDate(post.updated_at)}
-              </time>
-            </span>
-          )}
-        </div>
       </header>
 
       {/* Post Excerpt */}

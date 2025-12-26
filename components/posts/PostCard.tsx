@@ -1,6 +1,6 @@
 /**
  * Post Card Component
- * Stunning floating glass card with hover animations
+ * Medium-style editorial list item
  */
 
 import Link from 'next/link';
@@ -12,83 +12,52 @@ interface PostCardProps {
   index?: number;
 }
 
-export function PostCard({ post, index = 0 }: PostCardProps) {
-  const excerpt = post.excerpt || extractExcerpt(post.body, 180);
+export function PostCard({ post, index }: PostCardProps) {
+  const excerpt = post.excerpt || extractExcerpt(post.body, 140);
 
   return (
-    <article
-      className="group relative animate-fadeInUp opacity-0"
-      style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}
-    >
-      {/* Glow effect on hover */}
-      <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 opacity-0 blur-lg transition-all duration-500 group-hover:opacity-30" />
+    <article className="border-b border-[#f2f2f2] last:border-0 py-8 group">
+      <Link href={`/posts/${post.id}`} className="flex justify-between gap-12">
+        <div className="flex-1 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="h-5 w-5 rounded-full bg-gray-200 flex items-center justify-center text-[10px] text-gray-500 font-medium">A</span>
+              <span className="text-sm text-gray-700 font-medium">{post.author?.name || 'Author'}</span>
+              <span className="text-xs text-gray-400">•</span>
+              <time dateTime={post.created_at} className="text-sm text-gray-500">
+                {formatDate(post.created_at)}
+              </time>
+            </div>
 
-      <Link
-        href={`/posts/${post.id}`}
-        className="relative block overflow-hidden rounded-2xl glass p-6 transition-all duration-300 hover:translate-y-[-4px] hover:shadow-2xl"
-      >
-        {/* Featured Image */}
+            <h2 className="text-xl md:text-2xl font-bold font-serif text-gray-900 mb-2 group-hover:underline decoration-gray-900 decoration-2 underline-offset-4 leading-tight">
+              {post.title}
+            </h2>
+
+            <p className="hidden md:block text-base text-gray-500 font-sans leading-relaxed line-clamp-2 mb-4">
+              {excerpt}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-4 mt-2">
+            {post.status === 'draft' && (
+              <span className="inline-flex items-center rounded-sm bg-yellow-100 px-2 py-0.5 text-xs font-medium text-yellow-800">
+                Draft
+              </span>
+            )}
+            <span className="text-sm text-gray-500">3 min read</span>
+            <span className="text-sm text-gray-400">Selected for you</span>
+          </div>
+        </div>
+
         {post.featured_image && (
-          <div className="relative mb-4 overflow-hidden rounded-xl">
+          <div className="flex-shrink-0 w-24 h-24 md:w-40 md:h-28 hidden sm:block">
             <img
               src={post.featured_image}
               alt={post.title}
-              className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="w-full h-full object-cover rounded-sm"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </div>
         )}
-
-        {/* Status Badge */}
-        {post.status === 'draft' && (
-          <span className="mb-3 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 px-3 py-1 text-xs font-medium text-amber-600 dark:text-amber-400 border border-amber-500/20">
-            <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
-            Draft
-          </span>
-        )}
-
-        {/* Title with gradient on hover */}
-        <h2 className="mb-3 text-xl font-bold tracking-tight transition-all duration-300 group-hover:gradient-text">
-          <span className="bg-gradient-to-r from-foreground to-foreground bg-clip-text text-transparent transition-all duration-300 group-hover:from-purple-500 group-hover:via-pink-500 group-hover:to-orange-400">
-            {post.title}
-          </span>
-        </h2>
-
-        {/* Excerpt */}
-        <p className="mb-5 text-sm leading-relaxed text-foreground/60">
-          {excerpt}
-        </p>
-
-        {/* Footer with meta and animated arrow */}
-        <div className="flex items-center justify-between">
-          {/* Date with icon */}
-          <div className="flex items-center gap-2 text-xs text-foreground/40">
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            <time dateTime={post.created_at}>
-              {formatDate(post.created_at)}
-            </time>
-          </div>
-
-          {/* Read more with animated arrow */}
-          <span className="flex items-center gap-2 text-sm font-medium text-purple-500 dark:text-purple-400">
-            Read
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-500/10 transition-all duration-300 group-hover:bg-purple-500 group-hover:text-white">
-              <svg
-                className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
-          </span>
-        </div>
-
-        {/* Decorative corner gradient */}
-        <div className="absolute -bottom-10 -right-10 h-32 w-32 rounded-full bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </Link>
     </article>
   );

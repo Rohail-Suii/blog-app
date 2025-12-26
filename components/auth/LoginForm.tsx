@@ -116,14 +116,7 @@ export function LoginForm() {
 
   return (
     <div className="w-full max-w-md space-y-8">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-          Welcome back
-        </h1>
-        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-          Sign in to your account to continue
-        </p>
-      </div>
+
 
       {error && (
         <div className="rounded-md bg-red-50 p-4 dark:bg-red-900/50">
@@ -132,13 +125,13 @@ export function LoginForm() {
       )}
 
       {/* Auth Mode Toggle */}
-      <div className="flex rounded-lg bg-gray-100 p-1 dark:bg-gray-800">
+      <div className="flex rounded-full bg-gray-100 p-1">
         <button
           type="button"
           onClick={() => setAuthMode('password')}
           className={`flex-1 rounded-md py-2 text-sm font-medium transition-colors ${authMode === 'password'
-              ? 'bg-white text-gray-900 shadow dark:bg-gray-700 dark:text-white'
-              : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+            ? 'bg-white text-gray-900 shadow dark:bg-gray-700 dark:text-white'
+            : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
             }`}
         >
           Password
@@ -150,8 +143,8 @@ export function LoginForm() {
             setOtpSent(false);
           }}
           className={`flex-1 rounded-md py-2 text-sm font-medium transition-colors ${authMode === 'otp'
-              ? 'bg-white text-gray-900 shadow dark:bg-gray-700 dark:text-white'
-              : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
+            ? 'bg-white text-gray-900 shadow dark:bg-gray-700 dark:text-white'
+            : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
             }`}
         >
           Magic Link
@@ -168,7 +161,7 @@ export function LoginForm() {
               {...passwordForm.register('email')}
               type="email"
               autoComplete="email"
-              className="input-magic mt-1"
+              className="mt-1 block w-full border-b border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:border-black focus:outline-none transition-colors bg-transparent"
               placeholder="you@example.com"
             />
             {passwordForm.formState.errors.email && (
@@ -186,7 +179,7 @@ export function LoginForm() {
               {...passwordForm.register('password')}
               type="password"
               autoComplete="current-password"
-              className="input-magic mt-1"
+              className="mt-1 block w-full border-b border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:border-black focus:outline-none transition-colors bg-transparent"
               placeholder="••••••••"
             />
             {passwordForm.formState.errors.password && (
@@ -199,7 +192,7 @@ export function LoginForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="flex w-full justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex w-full justify-center rounded-full bg-black px-4 py-3 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50 transition-colors"
           >
             {isLoading ? 'Signing in...' : 'Sign in'}
           </button>
@@ -242,7 +235,7 @@ export function LoginForm() {
               {...otpForm.register('email')}
               type="email"
               autoComplete="email"
-              className="input-magic mt-1"
+              className="mt-1 block w-full border-b border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:border-black focus:outline-none transition-colors bg-transparent"
               placeholder="you@example.com"
             />
             {otpForm.formState.errors.email && (
@@ -255,7 +248,7 @@ export function LoginForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="flex w-full justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex w-full justify-center rounded-full bg-black px-4 py-3 text-sm font-medium text-white hover:bg-gray-800 disabled:opacity-50 transition-colors"
           >
             {isLoading ? 'Sending...' : 'Send magic link'}
           </button>
@@ -279,7 +272,7 @@ export function LoginForm() {
         type="button"
         onClick={handleGoogleLogin}
         disabled={isLoading}
-        className="flex w-full items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+        className="flex w-full items-center justify-center gap-3 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 transition-colors"
       >
         <svg className="h-5 w-5" viewBox="0 0 24 24">
           <path
@@ -307,9 +300,9 @@ export function LoginForm() {
         Don&apos;t have an account?{' '}
         <Link
           href="/auth/signup"
-          className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300"
+          className="font-medium text-green-600 hover:text-green-700 underline"
         >
-          Sign up
+          Create one
         </Link>
       </p>
     </div>

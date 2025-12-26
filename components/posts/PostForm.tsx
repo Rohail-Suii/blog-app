@@ -112,186 +112,59 @@ export function PostForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="max-w-[720px] mx-auto py-12">
       {error && (
-        <div className="rounded-md bg-red-50 p-4 dark:bg-red-900/50">
-          <p className="text-sm text-red-700 dark:text-red-200">{error}</p>
+        <div className="rounded-md bg-red-50 p-4 mb-6">
+          <p className="text-sm text-red-700">{error}</p>
         </div>
       )}
 
-      {/* Status Toggle */}
-      <div className="flex items-center justify-between rounded-lg bg-gray-50 p-4 dark:bg-gray-800/50">
-        <div>
-          <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Post Status
-          </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            {status === 'draft' ? 'Save as draft - only visible to you' : 'Publish immediately'}
-          </p>
-        </div>
-        <div className="flex gap-2">
+      {/* Header Actions */}
+      <div className="flex items-center justify-between mb-8">
+        <span className="text-sm text-gray-500">Draft in {user?.email}</span>
+        <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={() => setValue('status', 'draft')}
-            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${status === 'draft'
-              ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900'
-              : 'bg-white text-gray-700 hover:bg-gray-100 dark:bg-gray-700 dark:text-gray-300'
-              }`}
-          >
-            Draft
-          </button>
-          <button
-            type="button"
-            onClick={() => setValue('status', 'published')}
-            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${status === 'published'
-              ? 'bg-blue-600 text-white'
-              : 'bg-white text-gray-700 hover:bg-gray-100 dark:bg-gray-700 dark:text-gray-300'
-              }`}
+            disabled={isSubmitting || loading}
+            className="rounded-full bg-green-600 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-green-700 disabled:opacity-50"
+            onClick={() => {
+              setValue('status', 'published');
+              handleSubmit(onSubmit)();
+            }}
           >
             Publish
           </button>
+          <button
+            type="button"
+            className="text-gray-400 hover:text-gray-900"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg>
+          </button>
         </div>
       </div>
 
-      {/* Title Field */}
-      <div>
-        <label
-          htmlFor="title"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-        >
-          Title
-        </label>
+      <div className="space-y-4">
         <input
           {...register('title')}
           type="text"
-          id="title"
-          placeholder="Enter your post title..."
-          className="input-magic mt-1"
+          placeholder="Title"
+          className="w-full text-4xl md:text-5xl font-serif font-bold placeholder-gray-300 border-l border-gray-300 pl-4 ml-[-1rem] focus:outline-none focus:border-gray-800 transition-colors bg-transparent"
         />
-        {errors.title && (
-          <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-            {errors.title.message}
-          </p>
-        )}
-      </div>
-
-      {/* Excerpt Field */}
-      <div>
-        <label
-          htmlFor="excerpt"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-        >
-          Excerpt <span className="text-gray-400">(optional - appears in post previews)</span>
-        </label>
         <textarea
           {...register('excerpt')}
-          id="excerpt"
-          rows={2}
-          placeholder="A short summary of your post..."
-          className="input-magic mt-1 resize-none"
+          rows={1}
+          placeholder="Tell your story..."
+          className="w-full text-xl text-gray-500 font-serif placeholder-gray-300 border-none p-0 focus:ring-0 resize-none bg-transparent"
         />
-        {errors.excerpt && (
-          <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-            {errors.excerpt.message}
-          </p>
-        )}
       </div>
 
-      {/* Featured Image Field */}
-      <div>
-        <label
-          htmlFor="featured_image"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
-        >
-          Featured Image URL <span className="text-gray-400">(optional)</span>
-        </label>
-        <input
-          {...register('featured_image')}
-          type="url"
-          id="featured_image"
-          placeholder="https://example.com/image.jpg"
-          className="input-magic mt-1"
-        />
-        {errors.featured_image && (
-          <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-            {errors.featured_image.message}
-          </p>
-        )}
-      </div>
-
-      {/* Body Field */}
-      <div>
-        <label
-          htmlFor="body"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-        >
-          Content
-        </label>
+      <div className="mt-8">
         <RichTextEditor
           content={watch('body')}
           onChange={(value) => setValue('body', value, { shouldValidate: true })}
-          placeholder="Tell your story..."
+          placeholder=""
         />
-        {errors.body && (
-          <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-            {errors.body.message}
-          </p>
-        )}
       </div>
-
-      {/* Author Info */}
-      {
-        user && (
-          <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800/50">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              <span className="font-medium">Publishing as:</span> {user.email}
-            </p>
-          </div>
-        )
-      }
-
-      {/* Submit Button */}
-      <div className="flex justify-end gap-3">
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="rounded-lg border border-gray-300 bg-white px-6 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          disabled={isSubmitting || loading}
-          className="flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          {isSubmitting || loading ? (
-            <>
-              <svg
-                className="h-4 w-4 animate-spin"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
-              </svg>
-              {status === 'draft' ? 'Saving...' : 'Publishing...'}
-            </>
-          ) : (
-            status === 'draft' ? 'Save Draft' : 'Publish Post'
-          )}
-        </button>
-      </div>
-    </form >
+    </form>
   );
 }

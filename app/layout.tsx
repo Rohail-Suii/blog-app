@@ -4,19 +4,21 @@
  */
 
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Playfair_Display, Inter } from 'next/font/google';
 import { Header, Footer } from '@/components/layout';
 import { Providers } from './providers';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const playfair = Playfair_Display({
   subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const inter = Inter({
   subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
 });
 
 // Site-wide metadata
@@ -72,7 +74,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col bg-gray-50 font-sans antialiased dark:bg-gray-900`}
+        className={`${playfair.variable} ${inter.variable} flex min-h-screen flex-col bg-white text-gray-900 font-sans antialiased dark:bg-gray-900 dark:text-gray-50`}
       >
         <Providers>
           <Header />
