@@ -30,7 +30,7 @@ export async function signUpWithEmail(email: string, password: string) {
     email,
     password,
     options: {
-      emailRedirectTo: `${getBaseURL()}/auth/callback?redirectTo=/auth/login`,
+      emailRedirectTo: `${getBaseURL()}/auth/callback?redirectTo=/`,
     },
   });
 
@@ -62,7 +62,7 @@ export async function signInWithOTP(email: string) {
   const { data, error } = await supabase.auth.signInWithOtp({
     email,
     options: {
-      emailRedirectTo: `${getBaseURL()}/auth/callback?redirectTo=/auth/login`,
+      emailRedirectTo: `${getBaseURL()}/auth/callback?redirectTo=/`,
     },
   });
 
