@@ -129,7 +129,7 @@ export function LoginForm() {
         <button
           type="button"
           onClick={() => setAuthMode('password')}
-          className={`flex-1 rounded-md py-2 text-sm font-medium transition-colors ${authMode === 'password'
+          className={`flex-1 rounded-full py-2 text-sm font-medium transition-colors ${authMode === 'password'
             ? 'bg-white text-gray-900 shadow dark:bg-gray-700 dark:text-white'
             : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
             }`}
@@ -142,7 +142,7 @@ export function LoginForm() {
             setAuthMode('otp');
             setOtpSent(false);
           }}
-          className={`flex-1 rounded-md py-2 text-sm font-medium transition-colors ${authMode === 'otp'
+          className={`flex-1 rounded-full py-2 text-sm font-medium transition-colors ${authMode === 'otp'
             ? 'bg-white text-gray-900 shadow dark:bg-gray-700 dark:text-white'
             : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white'
             }`}
