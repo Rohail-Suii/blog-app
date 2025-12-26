@@ -161,7 +161,7 @@ export function LoginForm() {
               {...passwordForm.register('email')}
               type="email"
               autoComplete="email"
-              className="mt-1 block w-full border-b border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:border-black focus:outline-none transition-colors bg-transparent"
+              className="mt-1 block w-full border-b border-gray-400 py-2 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-black dark:focus:border-white focus:outline-none transition-colors bg-transparent"
               placeholder="you@example.com"
             />
             {passwordForm.formState.errors.email && (
@@ -179,7 +179,7 @@ export function LoginForm() {
               {...passwordForm.register('password')}
               type="password"
               autoComplete="current-password"
-              className="mt-1 block w-full border-b border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:border-black focus:outline-none transition-colors bg-transparent"
+              className="mt-1 block w-full border-b border-gray-400 py-2 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-black dark:focus:border-white focus:outline-none transition-colors bg-transparent"
               placeholder="••••••••"
             />
             {passwordForm.formState.errors.password && (
@@ -258,10 +258,10 @@ export function LoginForm() {
       {/* Divider */}
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-300 dark:border-gray-600" />
+          <div className="w-full border-t border-gray-400 dark:border-gray-600" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="bg-white px-2 text-gray-500 dark:bg-gray-900 dark:text-gray-400">
+          <span className="bg-gray-50 px-2 text-gray-600 dark:bg-[#121212] dark:text-gray-400">
             Or continue with
           </span>
         </div>
@@ -272,7 +272,7 @@ export function LoginForm() {
         type="button"
         onClick={handleGoogleLogin}
         disabled={isLoading}
-        className="flex w-full items-center justify-center gap-3 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 transition-colors"
+        className="flex w-full items-center justify-center gap-3 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-800 hover:bg-gray-50 disabled:opacity-50 transition-colors"
       >
         <svg className="h-5 w-5" viewBox="0 0 24 24">
           <path

@@ -130,14 +130,14 @@ export function SignupForm() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-800 dark:text-gray-300">
             Email address
           </label>
           <input
             {...register('email')}
             type="email"
             autoComplete="email"
-            className="mt-1 block w-full border-b border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:border-black focus:outline-none transition-colors bg-transparent"
+            className="mt-1 block w-full border-b border-gray-400 py-2 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-black dark:focus:border-white focus:outline-none transition-colors bg-transparent"
             placeholder="you@example.com"
           />
           {errors.email && (
@@ -146,33 +146,33 @@ export function SignupForm() {
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label htmlFor="password" className="block text-sm font-medium text-gray-800 dark:text-gray-300">
             Password
           </label>
           <input
             {...register('password')}
             type="password"
             autoComplete="new-password"
-            className="mt-1 block w-full border-b border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:border-black focus:outline-none transition-colors bg-transparent"
+            className="mt-1 block w-full border-b border-gray-400 py-2 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-black dark:focus:border-white focus:outline-none transition-colors bg-transparent"
             placeholder="••••••••"
           />
           {errors.password && (
             <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.password.message}</p>
           )}
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
             Must be 8+ characters with uppercase, lowercase, and number
           </p>
         </div>
 
         <div>
-          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-800 dark:text-gray-300">
             Confirm password
           </label>
           <input
             {...register('confirmPassword')}
             type="password"
             autoComplete="new-password"
-            className="mt-1 block w-full border-b border-gray-300 py-2 text-gray-900 placeholder-gray-400 focus:border-black focus:outline-none transition-colors bg-transparent"
+            className="mt-1 block w-full border-b border-gray-400 py-2 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-black dark:focus:border-white focus:outline-none transition-colors bg-transparent"
             placeholder="••••••••"
           />
           {errors.confirmPassword && (
@@ -194,10 +194,10 @@ export function SignupForm() {
       {/* Divider */}
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-gray-300 dark:border-gray-600" />
+          <div className="w-full border-t border-gray-400 dark:border-gray-600" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="bg-white px-2 text-gray-500 dark:bg-gray-900 dark:text-gray-400">
+          <span className="bg-gray-50 px-2 text-gray-600 dark:bg-[#121212] dark:text-gray-400">
             Or continue with
           </span>
         </div>
@@ -208,7 +208,7 @@ export function SignupForm() {
         type="button"
         onClick={handleGoogleSignup}
         disabled={isLoading}
-        className="flex w-full items-center justify-center gap-3 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 transition-colors"
+        className="flex w-full items-center justify-center gap-3 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-800 hover:bg-gray-50 disabled:opacity-50 transition-colors"
       >
         <svg className="h-5 w-5" viewBox="0 0 24 24">
           <path
@@ -232,7 +232,7 @@ export function SignupForm() {
       </button>
 
       {/* Login Link */}
-      <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+      <p className="text-center text-sm text-gray-700 dark:text-gray-400">
         Already have an account?{' '}
         <Link
           href="/auth/login"

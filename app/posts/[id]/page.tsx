@@ -176,12 +176,12 @@ export default async function PostPage({ params }: PostPageProps) {
         <div className="flex items-center justify-between border-b border-gray-100 pb-8 mb-8">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-medium font-serif">
-              {post.author?.name ? post.author.name[0] : 'A'}
+              {post.author?.display_name ? post.author.display_name[0] : 'A'}
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                  {post.author?.name || 'Unknown Author'}
+                  {post.author?.display_name || 'Unknown Author'}
                 </span>
                 <button className="text-sm text-green-600 hover:text-green-700">Follow</button>
               </div>

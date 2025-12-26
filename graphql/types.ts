@@ -16,6 +16,7 @@ export interface Post {
   featured_image: string | null;
   status: 'draft' | 'published';
   author_id: string;
+  author?: Profile;
   created_at: string;
   updated_at: string;
 }

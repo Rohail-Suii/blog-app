@@ -26,6 +26,11 @@ export const GET_POSTS = gql`
           featured_image
           status
           author_id
+          author: profiles {
+            id
+            display_name
+            avatar_url
+          }
           created_at
           updated_at
         }
@@ -59,6 +64,11 @@ export const GET_POSTS_WITH_OFFSET = gql`
           featured_image
           status
           author_id
+          author: profiles {
+            id
+            display_name
+            avatar_url
+          }
           created_at
           updated_at
         }
@@ -92,6 +102,11 @@ export const GET_POST_BY_ID = gql`
           featured_image
           status
           author_id
+          author: profiles {
+            id
+            display_name
+            avatar_url
+          }
           created_at
           updated_at
         }
@@ -133,6 +148,12 @@ export const GET_POSTS_BY_AUTHOR = gql`
           body
           excerpt
           status
+          author_id
+          author: profiles {
+            id
+            display_name
+            avatar_url
+          }
           created_at
           updated_at
         }
@@ -169,6 +190,11 @@ export const SEARCH_POSTS = gql`
           body
           excerpt
           author_id
+          author: profiles {
+            id
+            display_name
+            avatar_url
+          }
           created_at
         }
       }

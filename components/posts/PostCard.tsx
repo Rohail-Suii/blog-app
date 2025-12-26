@@ -22,7 +22,7 @@ export function PostCard({ post, index }: PostCardProps) {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="h-5 w-5 rounded-full bg-gray-200 flex items-center justify-center text-[10px] text-gray-500 font-medium">A</span>
-              <span className="text-sm text-gray-700 font-medium">{post.author?.name || 'Author'}</span>
+              <span className="text-sm text-gray-700 font-medium">{post.author?.display_name || 'Author'}</span>
               <span className="text-xs text-gray-400">•</span>
               <time dateTime={post.created_at} className="text-sm text-gray-500">
                 {formatDate(post.created_at)}
